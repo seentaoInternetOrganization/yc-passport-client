@@ -194,6 +194,21 @@ exports.checkTicket = function(webserviceUrl, maxAge) {
         };
 
         request.post({ url: webserviceUrl, form: JSON.stringify(reqBody) }, function(err, response, body){
+            var fs = require('fs');
+            fs.writeFile("/tmp/request", JSON.stringify(reqBody), function(err) {
+                if(err) {
+                    return console.log(err);
+                }
+
+                console.log("The file was saved!");
+            });
+            fs.writeFile("/tmp/response", body, function(err) {
+                if(err) {
+                    return console.log(err);
+                }
+
+                console.log("The file was saved!");
+            });
 
             if (isJsonString(body) == false) {
                 res.json({

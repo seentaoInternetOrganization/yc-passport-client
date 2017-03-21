@@ -54,10 +54,10 @@ exports.checkSid = function(ssoUrl, siteUrl, webserviceUrl) {
     return function(req, res, next) {
         //如果不存在ycsid，则需重新登录
         if (!req.cookies.ycsid) {
-            res.redirect(`${ssoUrl}?redirectUrl=${siteUrl}`);
+            res.redirect(`${ssoUrl}?redirectUrl=${siteUrl}&errorMsg=NoSID`);
             return;
         }else if (!req.cookies.userId){ // 如果cookie中不存在userId，则也需要重新登录
-            res.redirect(`${ssoUrl}?redirectUrl=${siteUrl}`);
+            res.redirect(`${ssoUrl}?redirectUrl=${siteUrl}&errorMsg=NoUserId`);
             return;
         }else {
             //校验ycsid合法性

@@ -209,8 +209,12 @@ exports.checkTicket = function(webserviceUrl, maxAge) {
             const ret = JSON.parse(body);
 
             if (ret.code == 0 && ret.sessionId) {
-                //TODO 如果存在remember，则将sid存储时效为一个月，否则只存在于session中
-                res.cookie('ycsid', ret.sessionId, { maxAge: maxAge, httpOnly: true });
+                //如果存在remember，则将sid存储时效为一个月，否则只存在于session中
+                if (req.query.remember === 'true') {
+                    res.cookie('ycsid', ret.sessionId, { maxAge: maxAge, httpOnly: true });
+                }else{
+                    res.cookie('ycsid', ret.sessionId, { httpOnly: true });
+                }
                 res.cookie('userId', req.query.userId, { maxAge: maxAge });
                 res.cookie('userName', req.query.userName, { maxAge: maxAge });
                 res.cookie('userType', req.query.userType, { maxAge: maxAge });

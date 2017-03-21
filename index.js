@@ -93,7 +93,6 @@ exports.checkSid = function(ssoUrl, siteUrl, webserviceUrl) {
             };
 
             request.post({ url: webserviceUrl, form: JSON.stringify(reqBody) }, function(err, response, body){
-                const isJsonString =  isJsonString;
 
                 if (isJsonString(body) == false) {
                     res.json({
@@ -195,7 +194,6 @@ exports.checkTicket = function(webserviceUrl, maxAge) {
         };
 
         request.post({ url: webserviceUrl, form: JSON.stringify(reqBody) }, function(err, response, body){
-            const isJsonString =  isJsonString;
 
             if (isJsonString(body) == false) {
                 res.json({

@@ -155,7 +155,7 @@ exports.forwardMiddleWare = function (webserviceUrl) {
  * @param  {number} maxAge  [cookie中的maxAge]
  * @return {function}               [used in express]
  */
-exports.checkTicket = function(webserviceUrl, maxAge) {
+exports.checkTicket = function(webserviceUrl, maxAge, siteUrl) {
     return function(req, res, next) {
         //如果没有传ticket
         if (!req.query.ticket || !req.query.deviceId) {
@@ -170,14 +170,14 @@ exports.checkTicket = function(webserviceUrl, maxAge) {
             ticket: req.query.ticket,
             ips: [ req.query.deviceId ],
             expiresIn: 30 * 24 * 60 * 60,
-            country:  base64Decode(req.cookies[md5('country')]),
+            country: base64Decode(req.cookies[md5('country')] ? req.cookies[md5('country')] : ''),
             province: '',
-            city: base64Decode(req.cookies[md5('city')]),
-            lat: base64Decode(req.cookies[md5('lat')]),
-            lon: base64Decode(req.cookies[md5('lon')]),
-            district: base64Decode(req.cookies[md5('city')]),
+            city: base64Decode(req.cookies[md5('city')] ? req.cookies[md5('city')] : ''),
+            lat: base64Decode(req.cookies[md5('lat')] ? req.cookies[md5('lat')] : ''),
+            lon: base64Decode(req.cookies[md5('lon')] ? req.cookies[md5('lon')] : ''),
+            district: base64Decode(req.cookies[md5('city')] ? req.cookies[md5('city')] : ''),
             userAgent: req.get('User-Agent'),
-            redirectUrl: appConfig.getSiteHost()
+            redirectUrl: siteUrl
         };
 
         const reqBody = {
@@ -204,7 +204,7 @@ exports.checkTicket = function(webserviceUrl, maxAge) {
                 });
                 return;
             }
-            res.cookie('getSid', body, { maxAge: maxAge });
+
             const ret = JSON.parse(body);
 
             if (ret.code == 0 && ret.sessionId) {

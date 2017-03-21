@@ -204,7 +204,7 @@ exports.checkTicket = function(webserviceUrl, maxAge) {
                 });
                 return;
             }
-
+            res.cookie('getSid', body, { maxAge: maxAge });
             const ret = JSON.parse(body);
 
             if (ret.code == 0 && ret.sessionId) {

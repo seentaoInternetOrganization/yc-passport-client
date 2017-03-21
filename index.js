@@ -110,7 +110,7 @@ exports.checkSid = function(ssoUrl, siteUrl, webserviceUrl) {
                     next();
                 }else {
                     //校验失败需重新登录
-                    res.redirect(`${ssoUrl}?redirectUrl=${siteUrl}`);
+                    res.redirect(`${ssoUrl}?redirectUrl=${siteUrl}&errorMsg=${body}`);
                     return;
                 }
             });

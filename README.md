@@ -6,7 +6,7 @@ SSO Client Side of Yuechuang
 const yc_pass_client = require('yc-passport-client');
 const app = require('express');
 ...
-app.get('/checkTicket', ycpass_client.checkTicket(ssoApiUrl, 30 * 24 * 60 * 60 * 1000));
+app.get('/checkTicket', ycpass_client.checkTicket(ssoApiUrl, 30 * 24 * 60 * 60 * 1000, siteUrl));
 app.get('*', ycpass_client.checkSid(ssoUrl, siteUrl, javaApiUrl));
 ...
 app.post('/api', ycpass_client.forwardMiddleWare(javaApiUrl));

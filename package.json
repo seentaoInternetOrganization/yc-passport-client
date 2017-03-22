@@ -1,6 +1,6 @@
 {
   "name": "yc-passport-client",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "SSO Client Side of Yuechuang",
   "main": "index.js",
   "scripts": {

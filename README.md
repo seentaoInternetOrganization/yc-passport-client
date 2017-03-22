@@ -16,7 +16,7 @@ app.listen(app.get('port'), () => {
 });
 ```
 ## 参数说明:
-`ssoUrl`: 登录跳转地址
-`siteUrl`: 分站地址
-`javaApiUrl`: 后台api地址
-`ssoApiUrl`: 单点后台api地址
+- `ssoUrl`: 登录跳转地址
+- `siteUrl`: 分站地址
+- `javaApiUrl`: 后台api地址
+- `ssoApiUrl`: 单点后台api地址

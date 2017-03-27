@@ -182,10 +182,10 @@ exports.checkTicket = function(webserviceUrl, maxAge, siteUrl) {
 
         const reqBody = {
             header: {
-                deviceId: req.cookies.deviceId ? req.cookies.deviceId : '',
+                deviceId: req.cookies.deviceId ? req.cookies.deviceId : req.query.deviceId,
                 clientType: req.cookies.clientType ? req.cookies.clientType : 'web',
                 clientVersion: req.cookies.clientVersion ? req.cookies.clientVersion : '',
-                clientId: req.cookies.clientId ? req.cookies.clientId : ''
+                clientId: req.cookies.clientId ? req.cookies.clientId : req.query.deviceId
             },
             body: {
                 action: 'getSid',
@@ -214,10 +214,10 @@ exports.checkTicket = function(webserviceUrl, maxAge, siteUrl) {
                 }else{
                     res.cookie('ycsid', ret.sessionId, { httpOnly: true });
                 }
-                res.cookie('userId', req.query.userId, { maxAge: maxAge });
-                res.cookie('userName', req.query.userName, { maxAge: maxAge });
-                res.cookie('userType', req.query.userType, { maxAge: maxAge });
-                res.cookie('imgLink', req.query.imgLink, { maxAge: maxAge });
+                res.cookie('userId', ret.userId, { maxAge: maxAge });
+                res.cookie('userName', ret.userName, { maxAge: maxAge });
+                res.cookie('userType', ret.userType, { maxAge: maxAge });
+                res.cookie('imgLink', ret.imgLink, { maxAge: maxAge });
                 res.cookie('remember', req.query.remember, { maxAge: maxAge });
                 res.status(200).send('ok');
                 return;
